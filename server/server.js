@@ -9,6 +9,9 @@ const { IamAuthenticator } = require('ibm-watson/auth');
 var cron = require('node-cron');
 
 app.use(cors());
+app.get('/', function(req, res){
+    res.send('server is up and running');
+})
 
 const visualRecognition = new VisualRecognitionV3({
     version: '2018-03-19',
