@@ -4,7 +4,7 @@ import './App.css';
 import NavBar from './components/navbar'
 import io from 'socket.io-client';
 
-const ENDPOINT = 'localhost:5000';
+const ENDPOINT = 'https://object-detection-kzsher-demo.herokuapp.com/';
 const FILETYPES = ['jpg', 'jpeg', 'png']; 
 
 class App extends Component {
