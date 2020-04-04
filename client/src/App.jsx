@@ -4,7 +4,6 @@ import './App.css';
 import NavBar from './components/navbar'
 import io from 'socket.io-client';
 
-const ENDPOINT = 'localhost:5000';
 const FILETYPES = ['jpg', 'jpeg', 'png']; 
 
 class App extends Component {
@@ -16,7 +15,7 @@ class App extends Component {
         showLoading: false
     }
 
-    socket = io(ENDPOINT);
+    socket = io();
 
     componentDidMount(){
         this.socket.on('image classes', imgClasses => {
