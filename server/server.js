@@ -3,12 +3,10 @@ const express = require('express')
 const cors = require('cors');
 const app = express()
 const socketio = require('socket.io')
-const config = require('./config.js');
 const PORT = process.env.PORT || 5000;
 const VisualRecognitionV3 = require('ibm-watson/visual-recognition/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
 var cron = require('node-cron');
-
 
 app.use(cors());
 app.get('/', function(req, res){
@@ -18,9 +16,9 @@ app.get('/', function(req, res){
 const visualRecognition = new VisualRecognitionV3({
     version: '2018-03-19',
     authenticator: new IamAuthenticator({
-    apikey: config.apikey,
+    apikey: process.env.API_KEY,
     }),
-    url: config.url,
+    url: 'https://gateway.watsonplatform.net/visual-recognition/api',
 });
         
 const server = http.createServer(app).listen(PORT, function() {
@@ -73,3 +71,7 @@ cron.schedule('00 00 12 29 * *', () => {
     scheduled: true,
     timezone: 'Asia/Kuala_Lumpur'
 });
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+}
